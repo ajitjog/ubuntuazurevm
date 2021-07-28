@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coreapi-deploy
+  labels:
+    app: coreapiapp
+spec:
+  selector:
+    matchLabels:
+      app: coreapiapp
+      ver:  v1
+  replicas: 2
+  template:
+    metadata:
+      name: coreapikube
+      labels:
+        app: coreapiapp
+        ver:  v1
+    spec:
+      containers:
+      - name: coreapicontainer
+        image: ajitjog/coreapiapp:v1
+        imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: coreapi-service
+spec:
+  selector:
+    app: coreapiapp
+    ver: v1
+  ports:
+    - port: 80
+  type: ClusterIP
+  
+  

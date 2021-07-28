@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coremvc-deploy
+  labels:
+    app: coremvcapp
+spec:
+  selector:
+    matchLabels:
+      app: coremvcapp
+  replicas: 1
+  template:
+    metadata:
+      name: coremvckube
+      labels:
+        app: coremvcapp
+        ver:  v1
+    spec:
+      containers:
+      - name: coremvccontainer
+        image: ajitjog/coremvcapp:v1
+        imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: coremvc-service
+spec:
+  selector:
+    app: coremvcapp
+    ver:  v1
+  ports:
+    - port: 80
+  type: ClusterIP
+  
+  

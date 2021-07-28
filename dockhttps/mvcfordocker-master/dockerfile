@@ -1,0 +1,7 @@
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
+
+WORKDIR /app
+
+ # copies the rest of your code
+ COPY . .
+ CMD ["dotnet", "mymvc1.dll"]

@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: apipod
+  labels:
+    app: apibackend
+    release: v1
+spec:
+  containers:
+  - name: apiapp
+    image: ajitjog/corewebapiapp:v1
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apisvc
+
+spec:
+  # This defines which pods are going to be represented by this Service
+  # The service becomes a network endpoint for either other services
+  # or maybe external users to connect to (eg browser)
+  selector:
+    app: apibackend
+    release: v1
+  ports:
+    - name: http
+      port: 80
+      nodePort: 30085
+
+  type: NodePort
+

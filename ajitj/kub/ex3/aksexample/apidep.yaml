@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mywebapi
+spec:
+  selector:
+    matchLabels:
+      app: mywebapi
+  replicas: 3
+  template: # template for the pods
+    metadata:
+      labels:
+        app: mywebapi
+    spec:
+      containers:
+      - name: mywebapi
+        image: ajitjog/corewebapiapp:v1
+

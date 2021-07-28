@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mywebapicm
+spec:
+  selector:
+    matchLabels:
+      app: mywebapicm
+  replicas: 3
+  template: # template for the pods
+    metadata:
+      labels:
+        app: mywebapicm
+    spec:
+      containers:
+      - name: mywebapicm
+        image: ajitjog/corewebapiapp:v1
+        envFrom:
+        - configMapRef:
+           name: democm

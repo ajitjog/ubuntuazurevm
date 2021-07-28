@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: democm
+  namespace: default
+data:
+  key1: "Hello from CM !!!"
+  key2: "Welcome to Kubernetes"
+
